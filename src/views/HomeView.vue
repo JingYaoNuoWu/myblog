@@ -1,18 +1,32 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div class="common-layout">
+    <el-container>
+      <el-aside width="200px">Aside</el-aside>
+      <el-container>
+        <el-main>
+
+            <div class="main-wapper">
+        <el-header>Header</el-header>
+
+            </div></el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+<script lang="ts" setup>
+  import { ref } from "@vue/reactivity";
 
-@Options({
-  components: {
-    HelloWorld,
-  },
-})
-export default class HomeView extends Vue {}
+
+  let a  = ref(1);
+
+  
+
+  
 </script>
+
+<style>
+.main-wapper{
+  min-height: 100vh;
+}
+</style>
