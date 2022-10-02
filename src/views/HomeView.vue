@@ -12,6 +12,9 @@
       <el-container>
         <el-main>
           <div class="main-wapper">
+            <div style="height:1000px">
+              <div v-for="item in 10" :key="item">123</div>
+            </div>
           </div>
         </el-main>
       </el-container>
@@ -26,8 +29,13 @@ let a = ref(1);
 </script>
 
 <style>
+.el-container{
+  height: 100%;
+}
 .main-wapper {
+  box-sizing: border-box;
   min-height: 100vh;
+  padding-top: 60px;
 }
 .el-container .el-aside {
   width: 260px;
@@ -42,9 +50,12 @@ let a = ref(1);
   right: 0;
   left: 260px;
   min-width: 100vh;
+  box-shadow: 0px 3px 5px 0 rgba(0, 0, 0, 0.05);
+  z-index: 99999;
 }
+
 #side-bar{
-  max-height: 100vh;
+  height: 100%; 
 }
 #aside-wapper{
   width: 100%;
