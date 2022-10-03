@@ -4,8 +4,13 @@ import MainView from '../views/MainView.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
-    component: MainView
+    name: 'main',
+    component: MainView,
+    children:[{
+      path: '',
+      name: 'homeMain',
+      component: () => import('../views/Home/Main.vue')
+    }]
   },
   {
     path: '/about',

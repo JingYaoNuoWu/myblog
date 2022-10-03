@@ -1,17 +1,17 @@
 <template>
-  <div :style="{ width: width + 'px', height : height + 'px' ,backgroundColor: backgroundColor}">
+  <div :style="{ width: `${params[0]}`, height : `${params[1]}`,backgroundColor:`${params[2]}`}">
     <slot></slot>
   </div>
   
 </template>
 
 <script setup lang="ts" >
-// const props = defineProps(["width","height","backgroundColor"]);
 defineProps<{
-  width?: string
-  height?: string
-  backgroundColor?:string
+  params:[string,string,string]
 }>()
+
+console.log();
+
 </script>
 
 <style>

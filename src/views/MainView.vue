@@ -14,7 +14,10 @@
         <el-main ref="dom" @scroll="scroll">
           <div class="main-wapper">
             <!-- //内容部分 -->
-            <router-view/>
+            <div class="main-inner-wapper">
+              <router-view/>
+            
+            </div>
           </div>
         </el-main>
       </el-container>
@@ -51,7 +54,7 @@ function scroll() {
 
 </script>
 
-<style>
+<style lang="scss">
 .el-container {
   height: 100%;
 }
@@ -60,7 +63,13 @@ function scroll() {
   box-sizing: border-box;
   min-height: 100vh;
   padding-top: 60px;
+  .main-inner-wapper{
+    min-height: calc(100vh - 60px);
+    box-sizing: border-box;
+    padding: 20px 0;
+  }
 }
+
 
 .el-container .el-aside {
   width: 260px;
@@ -78,7 +87,7 @@ function scroll() {
   left: 260px;
   min-width: 100vh;
   box-shadow: 0px 3px 5px 0 rgba(0, 0, 0, 0.05);
-  z-index: 99999;
+  z-index: 99;
 }
 
 #side-bar {
