@@ -1,6 +1,7 @@
 <template>
   <div class="common-layout">
       <el-header>Header</el-header>
+      <div style=""></div>
 
     <el-container>
       <el-aside id="side-bar" width="200px">
