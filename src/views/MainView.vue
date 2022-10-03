@@ -1,7 +1,7 @@
 <template>
   <div class="common-layout">
-      <el-header>Header</el-header>
-      <div style=""></div>
+    <el-header :style="{top: topBarHideFlag?'-60px':0 }"></el-header>
+    <div></div>
 
     <el-container>
       <el-aside id="side-bar" width="200px">
@@ -11,11 +11,10 @@
       </el-aside>
 
       <el-container>
-        <el-main>
+        <el-main ref="dom" @scroll="scroll">
           <div class="main-wapper">
-            <div style="height:1000px">
-              <div v-for="item in 10" :key="item">123</div>
-            </div>
+            <!-- //内容部分 -->
+            <router-view/>
           </div>
         </el-main>
       </el-container>
@@ -24,30 +23,57 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "@vue/reactivity";
+import { reactive, Ref, ref ,watch} from "vue";
+import { onMounted } from "vue";
 
-let a = ref(1);
+const topBarHideFlag = ref(false);
+
+const dom: Ref = ref(null);
+
+
+// onMounted(()=>{
+
+// })
+// watch(()=>dom.value.$el.scrollTop,(a)=>{    
+//     console.log(a);
+// })
+
+function scroll() {
+  if(dom.value.$el.scrollTop>60){
+    topBarHideFlag.value = true
+  }else{
+    topBarHideFlag.value = false
+  }
+  
+
+}
+
+
 </script>
 
 <style>
-.el-container{
+.el-container {
   height: 100%;
 }
+
 .main-wapper {
   box-sizing: border-box;
   min-height: 100vh;
   padding-top: 60px;
 }
+
 .el-container .el-aside {
   width: 260px;
 }
+
 .el-container .el-main {
   padding: 0;
   padding-left: calc((100% - 1100px)/2);
 }
+
 .el-header {
   position: fixed;
-  top:0;
+  top: 0;
   right: 0;
   left: 260px;
   min-width: 100vh;
@@ -55,10 +81,11 @@ let a = ref(1);
   z-index: 99999;
 }
 
-#side-bar{
-  height: 100%; 
+#side-bar {
+  height: 100%;
 }
-#aside-wapper{
+
+#aside-wapper {
   width: 100%;
   overflow-y: auto;
 
