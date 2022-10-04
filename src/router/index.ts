@@ -10,6 +10,10 @@ const routes: Array<RouteRecordRaw> = [
       path: '',
       name: 'homeMain',
       component: () => import('../views/Home/Main.vue')
+    },{
+      path: '/tags',
+      name: 'tagMain',
+      component: () => import('../views/Tag/Main.vue')
     }]
   },
   {
