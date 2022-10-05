@@ -9,7 +9,10 @@ const routes: Array<RouteRecordRaw> = [
     children:[{
       path: '',
       name: 'homeMain',
-      component: () => import('../views/Home/Main.vue')
+      component: () => import('../views/Home/Main.vue'),
+      children:[
+        
+      ]
     },{
       path: '/tags',
       name: 'tagMain',

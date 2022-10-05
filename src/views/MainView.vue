@@ -7,21 +7,21 @@
         <!-- 这是侧边栏 ， 顶部是头像， 下面是姓名和座右铭，然后是四个菜单 -->
         <!-- 外层直接flex布局吧 -->
         <div id="aside-wapper">
-          <div class="avatar-container" @click="toPage('/')">
+          <div class="avatar-container">
             <el-avatar :size="50" src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png">
-              <img src="@/assets/logo.png" />
+              <img  src="@/assets/logo.png" />
             </el-avatar>
           </div>
           <ul class="main-menu">
-            <li :class="{active:nowIndex==0}" @click="toPage('/')">
-                <h2>主页</h2>
+            <li :class="{active:nowIndex==0}" @click="changeNav('/',0)">
+              <h2>主页</h2>
             </li>
-            <li :class="{active:nowIndex==1}"  @click="toPage('/tags')">
-                <h2>标签</h2>
+            <li :class="{active:nowIndex==1}" @click="changeNav('/tags',1)">
+              <h2>标签</h2>
 
             </li>
-            <li :class="{active:nowIndex==2}" @click="toPage('/class')">
-                <h2 >分类</h2>
+            <li :class="{active:nowIndex==2}" @click="changeNav('/class',2)">
+              <h2>分类</h2>
 
             </li>
 
@@ -37,9 +37,41 @@
             <div class="main-inner-wapper">
               <div class="main-content">
                 <router-view />
-                
+
               </div>
-              <div class="aside-tips"></div>
+              <div class="aside-tips">
+                <div class="aside-tips-item ">
+                  <h1>最近更新</h1>
+                  <ul>
+                    <li>
+                      <a href="#">123</a>
+                    </li>
+                    <li><a href="#">123</a></li>
+                    <li><a href="#">123</a></li>
+                  </ul>
+
+                </div>
+                <div class="aside-tips-item">
+                  <h1>热点标签</h1>
+                  <ul>
+                    <li>
+                      <a href="#">123</a>
+                    </li>
+                    <li><a href="#">123</a></li>
+                    <li><a href="#">123</a></li>
+                  </ul>
+                </div>
+                <div id="article-content" :class="{'aside-tips-item':true,'tips-topbar-down':!topBarHideFlag}">
+                  <h1>文章目录</h1>
+                  <ul>
+                    <li>
+                      <a href="#">123</a>
+                    </li>
+                    <li><a href="#">123</a></li>
+                    <li><a href="#">123</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </el-main>
@@ -51,7 +83,6 @@
 <script lang="ts" setup>
 import { onUnmounted, reactive, Ref, ref, watch } from "vue";
 import { onMounted } from "vue";
-import ContentBox from "@/components/mycomponents/ContentBox.vue";
 import { useRouter } from "vue-router";
 
 const topBarHideFlag = ref(false);
@@ -63,10 +94,10 @@ let scrollTop: any = 0
 const router = useRouter()
 
 const nowIndex = ref(0)
-let topBarInterval:any
+let topBarInterval: any
 onMounted(() => {
-   topBarInterval =  setInterval(() => {
-      if (dom.value.$el.scrollTop > 60) {
+  topBarInterval = setInterval(() => {
+    if (dom.value.$el.scrollTop > 60) {
       if (scrollTop < dom.value.$el.scrollTop) {
         topBarHideFlag.value = true
       } else if (scrollTop > dom.value.$el.scrollTop) {
@@ -78,14 +109,15 @@ onMounted(() => {
     scrollTop = dom.value.$el.scrollTop
   }, 300)
 })
-onUnmounted(()=>{
+onUnmounted(() => {
   console.log("onUnmounted");
-  
+
   clearInterval(topBarInterval)
 })
 
-function toPage(path:string) {
-   router.push(path)
+function changeNav(path: string, index: number) {
+  router.push(path)
+  nowIndex.value = index
 } 
 </script>
 
@@ -106,8 +138,8 @@ function toPage(path:string) {
     display: flex;
 
     .main-content {
-        flex-basis: 70%;
-        padding: 0 20px;
+      flex-basis: 70%;
+      padding: 0 20px;
     }
   }
 }
@@ -115,6 +147,7 @@ function toPage(path:string) {
 
 .el-container .el-aside {
   width: 260px;
+  background-color: #876;
 }
 
 .el-container .el-main {
@@ -152,22 +185,78 @@ function toPage(path:string) {
 .main-menu {
   padding: 0;
   margin-top: 40px;
-  li{
+
+  li {
     list-style: none;
     margin: 40px 0;
-    // display: flex;
-    // align-items: center;
-    .active{
-      top:-10px
+    height: 3.3rem;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    align-items: center;
+    cursor: pointer;
+    color: #ffffff79;
+    h2{
+      width: 100%;
+      margin: 0;
     }
   }
-  li:last-child::after{
+
+  // li:nth-child(1).active {
+  //     top: -10px
+  // }
+  li:last-child::after {
     width: 3px;
     background-color: red;
+    height: 2rem;
     content: "";
     position: relative;
+    top: 0px;
     display: block;
     box-sizing: border-box;
+    transition: top .5s ease;
+    visibility: hidden;
   }
+  li.active:nth-child(1)~li:last-child::after,
+  li:nth-child(1):hover~li:last-child::after {
+    top: -6.6rem;
+    visibility :visible;
+  }
+
+  li.active:nth-child(2)~li:last-child::after,
+  li:nth-child(2):hover~li:last-child::after {
+    top: -3.3rem;
+    visibility: visible;
+  }
+
+  li.active:nth-child(3)~li:last-child::after,
+  li:nth-child(3):hover::after {
+    top: 0px !important;
+    visibility: visible;
+  }
+
+ 
+}
+.avatar-container img{
+  transition: all .5s ease;
+
+}
+.avatar-container span:hover img{
+  transform: scale(1.1,1.1);
+}
+
+.aside-tips{
+  display: flex;
+  flex-direction: column;
+  // .aside-tips-item{
+  // }
+  #article-content{
+    transition: top .4s ease;
+    position:sticky;
+    top:3rem;
+  }
+}
+.tips-topbar-down{
+  top:calc(3rem + 60px) !important;
 }
 </style>
