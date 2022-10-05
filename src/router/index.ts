@@ -14,6 +14,10 @@ const routes: Array<RouteRecordRaw> = [
       path: '/tags',
       name: 'tagMain',
       component: () => import('../views/Tag/Main.vue')
+    },{
+      path: '/class',
+      name: 'classMain',
+      component: () => import('../views/Class/Main.vue')
     }]
   },
   {

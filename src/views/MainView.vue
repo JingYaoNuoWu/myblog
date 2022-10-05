@@ -12,23 +12,17 @@
               <img src="@/assets/logo.png" />
             </el-avatar>
           </div>
-          <ul>
-            <li>
-              <div @click="toPage('/tags')">
-                <h2>1111</h2>
-              </div>
+          <ul class="main-menu">
+            <li :class="{active:nowIndex==0}" @click="toPage('/')">
+                <h2>主页</h2>
             </li>
-            <li>
-              <div>
-                <h2>2222</h2>
+            <li :class="{active:nowIndex==1}"  @click="toPage('/tags')">
+                <h2>标签</h2>
 
-              </div>
             </li>
-            <li>
-              <div>
-                <h2>3333</h2>
+            <li :class="{active:nowIndex==2}" @click="toPage('/class')">
+                <h2 >分类</h2>
 
-              </div>
             </li>
 
           </ul>
@@ -41,8 +35,11 @@
           <div class="main-wapper">
             <!-- //内容部分 -->
             <div class="main-inner-wapper">
-              <router-view />
-
+              <div class="main-content">
+                <router-view />
+                
+              </div>
+              <div class="aside-tips"></div>
             </div>
           </div>
         </el-main>
@@ -52,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, Ref, ref, watch } from "vue";
+import { onUnmounted, reactive, Ref, ref, watch } from "vue";
 import { onMounted } from "vue";
 import ContentBox from "@/components/mycomponents/ContentBox.vue";
 import { useRouter } from "vue-router";
@@ -65,24 +62,26 @@ let scrollTop: any = 0
 
 const router = useRouter()
 
+const nowIndex = ref(0)
+let topBarInterval:any
 onMounted(() => {
-  setInterval(() => {
-    if (dom.value.$el.scrollTop > 60) {
+   topBarInterval =  setInterval(() => {
+      if (dom.value.$el.scrollTop > 60) {
       if (scrollTop < dom.value.$el.scrollTop) {
         topBarHideFlag.value = true
-
       } else if (scrollTop > dom.value.$el.scrollTop) {
-
         topBarHideFlag.value = false
       }
     } else {
       topBarHideFlag.value = false
-
     }
-
     scrollTop = dom.value.$el.scrollTop
-
   }, 300)
+})
+onUnmounted(()=>{
+  console.log("onUnmounted");
+  
+  clearInterval(topBarInterval)
 })
 
 function toPage(path:string) {
@@ -104,6 +103,12 @@ function toPage(path:string) {
     min-height: calc(100vh - 60px);
     box-sizing: border-box;
     padding: 20px 0;
+    display: flex;
+
+    .main-content {
+        flex-basis: 70%;
+        padding: 0 20px;
+    }
   }
 }
 
@@ -142,5 +147,27 @@ function toPage(path:string) {
 
 .avatar-container {
   margin-top: 60px;
+}
+
+.main-menu {
+  padding: 0;
+  margin-top: 40px;
+  li{
+    list-style: none;
+    margin: 40px 0;
+    // display: flex;
+    // align-items: center;
+    .active{
+      top:-10px
+    }
+  }
+  li:last-child::after{
+    width: 3px;
+    background-color: red;
+    content: "";
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+  }
 }
 </style>

@@ -10,7 +10,6 @@ defineProps<{
   params:[string,string,string]
 }>()
 
-console.log();
 
 </script>
 
