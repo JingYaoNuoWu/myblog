@@ -24,7 +24,10 @@
               <h2>分类</h2>
 
             </li>
+            <li :class="{active:nowIndex==3}" @click="changeNav('/archives',3)">
+              <h2>归档</h2>
 
+            </li>
           </ul>
 
         </div>
@@ -139,7 +142,7 @@ function changeNav(path: string, index: number) {
 
     .main-content {
       flex-basis: 70%;
-      padding: 0 20px;
+      padding: 0 2rem !important;
     }
   }
 }
@@ -217,25 +220,40 @@ function changeNav(path: string, index: number) {
     transition: top .5s ease;
     visibility: hidden;
   }
-  li.active:nth-child(1)~li:last-child::after,
-  li:nth-child(1):hover~li:last-child::after {
-    top: -6.6rem;
+  li.active:nth-child(1)~li:last-child::after{
+    top: -9.9rem ;
     visibility :visible;
   }
+  li:nth-child(1):hover~li:last-child::after {
+    top: -9.9rem !important;
+    visibility :visible !important;
+  }
 
-  li.active:nth-child(2)~li:last-child::after,
+  li.active:nth-child(2)~li:last-child::after{
+    top: -6.6rem ;
+    visibility: visible ;
+  }
   li:nth-child(2):hover~li:last-child::after {
-    top: -3.3rem;
+    top: -6.6rem !important;
+    visibility: visible !important;
+  }
+  li.active:nth-child(3)~li:last-child::after{
+    top: -3.3rem ;
+    visibility: visible ;
+  }
+  li:nth-child(3):hover~li:last-child::after {
+    top: -3.3rem !important;
+    visibility: visible !important;
+  }
+  li.active:nth-child(4)::after{
+    top: 0px ;
     visibility: visible;
   }
-
-  li.active:nth-child(3)~li:last-child::after,
-  li:nth-child(3):hover::after {
+  li:nth-child(4):hover::after {
     top: 0px !important;
-    visibility: visible;
+    visibility: visible !important;
   }
 
- 
 }
 .avatar-container img{
   transition: all .5s ease;

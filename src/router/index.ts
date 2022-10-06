@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
       name: 'homeMain',
       component: () => import('../views/Home/Main.vue'),
       children:[
-        
+
       ]
     },{
       path: '/tags',
@@ -21,6 +21,10 @@ const routes: Array<RouteRecordRaw> = [
       path: '/class',
       name: 'classMain',
       component: () => import('../views/Class/Main.vue')
+    },{
+      path: '/archives',
+      name: 'archivesMain',
+      component: () => import('../views/Archives/Main.vue')
     }]
   },
   {
