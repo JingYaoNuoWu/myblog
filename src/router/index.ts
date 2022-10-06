@@ -25,6 +25,10 @@ const routes: Array<RouteRecordRaw> = [
       path: '/archives',
       name: 'archivesMain',
       component: () => import('../views/Archives/Main.vue')
+    },{
+      path: '/contents',
+      name: 'contentsMain',
+      component: () => import('../views/Contents/Main.vue')
     }]
   },
   {
