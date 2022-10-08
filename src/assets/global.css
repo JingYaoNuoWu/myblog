@@ -3,7 +3,10 @@ html,body {
     box-sizing: border-box;
     font-size: 16px;
     height: 100%;
+    overflow: hidden;
 }
 #app,.common-layout{
     height: 100%;
 }
+
+
